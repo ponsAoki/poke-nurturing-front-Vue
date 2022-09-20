@@ -61,11 +61,11 @@ export default {
         icon: "fa-solid fa-plus",
         link: "/add-pokemon",
       },
-      {
-        title: "流行を知る",
-        icon: "fa-solid fa-arrow-trend-up",
-        link: "/trend",
-      },
+      // {
+      //   title: "流行を知る",
+      //   icon: "fa-solid fa-arrow-trend-up",
+      //   link: "/trend",
+      // },
     ],
 
     pokemons: [],
