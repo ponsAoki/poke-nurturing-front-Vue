@@ -1,6 +1,6 @@
 import axios from 'axios'
-const loginUrl = 'https://poke-app-2-backend.herokuapp.com/api/login'
-const userUrl = 'https://poke-app-2-backend.herokuapp.com/api/user'
+const loginUrl = 'http://localhost:5001/api/login'
+const userUrl = 'http://localhost:5001/api/user'
 
 
 export const user = {

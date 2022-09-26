@@ -2,12 +2,20 @@
 <template>
   <div>
     <Default />
-    <ul>
-      <li v-for="poke in pokes" :key="poke.index">
-        <img :src="poke.image" max-width="100" max-height="100" />
-      </li>
-    </ul>
-    <img :src="pokes[0].image" max-width="100" max-height="100" />
+    <v-row class="flex-column">
+      <v-container v-for="poke in pokes" :key="poke.index">
+        <v-row class="flex-row align-center">
+          <!-- {{poke.index}} -->
+          <v-col>
+            <v-row no-gutters>
+              <div class="mr-10">{{poke.index+1}}位</div>
+              <div>{{poke.name}}</div>
+            </v-row>
+          </v-col>
+          <v-img :src="imageArr[poke.index]" max-width="150"></v-img>
+        </v-row>
+      </v-container>
+    </v-row>
   </div>
 </template>
 
@@ -35,7 +43,7 @@ export default {
 
   methods: {
     async forEachFun() {
-      await this.pokes.forEach(async (poke) => {
+      this.pokes.forEach(async (poke) => {
         await this.getImage(poke);
       });
     },
@@ -43,11 +51,11 @@ export default {
       const speciesRes = await axios.get(
         `${this.PokeApiIntro}/pokemon-species/${poke.id}`
       );
-      console.log(speciesRes);
       const speciesData = speciesRes.data;
       const res = await axios.get(speciesData.varieties[poke.form].pokemon.url);
       const image = await res.data.sprites.other.home.front_default;
-      // await this.imageArr.push(image);
+      this.imageArr[poke.index] = await image;
+      this.pokes.sort((a, b) => a.index - b.index)
       poke.image = image;
       console.log(this.pokes);
     },

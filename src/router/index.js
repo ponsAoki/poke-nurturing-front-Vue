@@ -9,7 +9,7 @@ import Trend from '../views/Trend.vue'
 import Post from '../views/Post.vue'
 import EditPost from '../views/EditPost.vue'
 import axios from 'axios'
-const userUrl = 'https://poke-app-2-backend.herokuapp.com/api/user'
+const userUrl = 'http://localhost:5001/api/user'
 
 import { store } from '../store'
 

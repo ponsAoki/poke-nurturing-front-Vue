@@ -2,9 +2,9 @@ import axios from 'axios';
 import router from './router/index'
 import { store } from './store/index'
 // import { useStore } from 'vuex'
-const postUrl = 'https://poke-app-2-backend.herokuapp.com/api/post';
-const searchUrl = 'https://poke-app-2-backend.herokuapp.com/api/search';
-const registerUrl = 'https://poke-app-2-backend.herokuapp.com/api/register';
+const postUrl = 'http://localhost:5001/api/post';
+const searchUrl = 'http://localhost:5001/api/search';
+const registerUrl = 'http://localhost:5001/api/register';
 // const loginUrl = '/api/login';
 
 // const store = useStore()
