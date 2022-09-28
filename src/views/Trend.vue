@@ -8,8 +8,8 @@
           <!-- {{poke.index}} -->
           <v-col>
             <v-row no-gutters>
-              <div class="mr-10">{{poke.index+1}}位</div>
-              <div>{{poke.name}}</div>
+              <div class="mr-10">{{ poke.index + 1 }}位</div>
+              <div>{{ poke.name }}</div>
             </v-row>
           </v-col>
           <v-img :src="imageArr[poke.index]" max-width="150"></v-img>
@@ -21,8 +21,8 @@
 
 <script>
 import Default from "@/components/Default.vue";
-import API from "../api";
 import axios from "axios";
+import API from "../api";
 export default {
   data() {
     return {
@@ -55,7 +55,7 @@ export default {
       const res = await axios.get(speciesData.varieties[poke.form].pokemon.url);
       const image = await res.data.sprites.other.home.front_default;
       this.imageArr[poke.index] = await image;
-      this.pokes.sort((a, b) => a.index - b.index)
+      this.pokes.sort((a, b) => a.index - b.index);
       poke.image = image;
       console.log(this.pokes);
     },
