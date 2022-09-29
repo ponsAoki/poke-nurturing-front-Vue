@@ -4,8 +4,11 @@
     <Default />
     <v-container>
       <!-- <v-row> -->
-      <v-col sm="10" class="pa-2 mx-auto d-flex justify-center">
-        <v-card style="width: 500px" class="pa-10 ma-10" max-width="1400">
+      <v-col
+        sm="10"
+        class="pa-2 mx-auto d-flex flex-column align-center justify-center"
+      >
+        <v-card style="width: 500px" class="pa-10 ma-4" max-width="1400">
           <v-card-title class="">
             {{ post.nn ? post.nn : post.title }}
           </v-card-title>
@@ -126,6 +129,9 @@
             <!-- </div> -->
           </v-card-text>
         </v-card>
+        <v-col style="width: 500px">
+          <a href="/">一覧ページに戻る</a>
+        </v-col>
       </v-col>
       <!-- </v-row> -->
     </v-container>

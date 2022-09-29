@@ -2,20 +2,32 @@
 <template>
   <div>
     <Default />
-    <v-row class="flex-column">
-      <v-container v-for="poke in pokes" :key="poke.index">
-        <v-row class="flex-row align-center">
-          <!-- {{poke.index}} -->
-          <v-col>
-            <v-row no-gutters>
-              <div class="mr-10">{{ poke.index + 1 }}位</div>
-              <div>{{ poke.name }}</div>
+    <v-container>
+      <h2 class="font-weight-medium my-4">シングルバトル使用率Top10</h2>
+      <v-divider class="mb-4"></v-divider>
+      <v-row class="flex-column">
+        <v-col class="my-4" v-for="poke in pokes" :key="poke.index">
+          <v-card class="px-8">
+            <v-row class="flex-row align-center">
+              <!-- {{poke.index}} -->
+              <v-col>
+                <v-row no-gutters class="d-flex align-center">
+                  <v-card-title class="mr-10" border="right"
+                    >{{ poke.index + 1 }}位</v-card-title
+                  >
+                  <v-card-title>{{ poke.name }}</v-card-title>
+                </v-row>
+              </v-col>
+              <v-img
+                :src="imageArr[poke.index]"
+                max-width="120"
+                max-height="120"
+              ></v-img>
             </v-row>
-          </v-col>
-          <v-img :src="imageArr[poke.index]" max-width="150"></v-img>
-        </v-row>
-      </v-container>
-    </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
