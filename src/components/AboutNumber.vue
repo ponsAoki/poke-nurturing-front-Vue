@@ -208,17 +208,17 @@ export default {
       this.en = this.enPro;
     },
     async IN() {
-      await this.nhCal();
-      await this.nOCal();
+      this.nhCal();
+      this.nOCal();
     },
     async en() {
-      await this.nhCal();
-      await this.nOCal();
+      this.nhCal();
+      this.nOCal();
     },
     async Pokemon() {
-      await this.bnFulled(this.Pokemon);
-      await this.nhCal();
-      await this.nOCal();
+      this.bnFulled(this.Pokemon);
+      this.nhCal();
+      this.nOCal();
     },
     Nature() {
       this.nOCal();

@@ -22,6 +22,7 @@
                 :src="imageArr[poke.index]"
                 max-width="120"
                 max-height="120"
+                class="mr-8"
               ></v-img>
             </v-row>
           </v-card>

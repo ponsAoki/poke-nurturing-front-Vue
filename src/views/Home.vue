@@ -109,8 +109,9 @@
                   color="success"
                   text
                   :to="{ name: 'edit-post', params: { id: post._id } }"
-                  >編集</v-btn
                 >
+                  編集
+                </v-btn>
                 <v-btn color="red" text @click="removePost(post._id)"
                   >削除</v-btn
                 >
@@ -124,14 +125,18 @@
 </template>
 
 <script>
-import Default from "../components/Default";
+import "font-awesome/css/font-awesome.min.css";
 import API from "../api";
+import Default from "../components/Default";
 // import axios from "axios";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Home",
   data() {
     return {
+      icons: {
+        edit: "fa-solid fa-pen-to-square",
+      },
       posts: [],
       postsCopy: [],
       selectedPokemon: "",
