@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import API from "../api";
 import axios from "axios";
+import API from "../api";
 
 export default {
   name: "Image-Link",
@@ -114,9 +114,9 @@ export default {
     imgJadge(pokemon) {
       console.log(pokemon);
       if (this.color === "rare") {
-        this.image = pokemon.sprites.front_shiny;
+        this.image = pokemon.sprites.other.home.front_shiny;
       } else if (this.color === null || this.color === "") {
-        this.image = pokemon.sprites.front_default;
+        this.image = pokemon.sprites.other.home.front_default;
       }
     },
 
