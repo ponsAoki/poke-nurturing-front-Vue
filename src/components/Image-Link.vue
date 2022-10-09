@@ -15,9 +15,6 @@
 </template>
 
 <script>
-import axios from "axios";
-import API from "../api";
-
 export default {
   name: "Image-Link",
   props: {
@@ -44,9 +41,9 @@ export default {
   },
 
   watch: {
-    Pokemon() {
-      console.log(this.Pokemon);
-      this.imgSrc();
+    async Pokemon() {
+      await this.imgSrc();
+      this.tetsuLinkOn();
     },
     image() {
       this.imageChange();
@@ -58,64 +55,92 @@ export default {
 
   methods: {
     async imgSrc() {
-      const Pokemon = this.Pokemon;
-      console.log(Pokemon._id);
-      const url = this.PokeApiIntro + `pokemon-species/${Pokemon.no}`;
-      const pokemon = await axios.get(url);
-      if (pokemon) {
-        for (let i = 0; i < pokemon.data.names.length; i++) {
-          const response = await this.simPokeByNum(Pokemon);
-          if (response) {
-            console.log(response[i]._id);
-            if (response[i]._id == Pokemon._id) {
-              this.tetsuLinkOn(i);
-              this.simPokesId = i;
-              const formI = await axios.get(
-                pokemon.data.varieties[i].pokemon.url
-              );
-              if (formI) {
-                this.imgJadge(formI.data);
-                return this.simPokesId;
-              }
-            }
+      const thisPokemon = this.Pokemon;
+      const pokeName = thisPokemon.name;
+      console.log(pokeName);
+      const pokeForm = thisPokemon.form;
+      const url = this.PokeApiIntro + `pokemon-species/${thisPokemon.no}`;
+      const pokemon = await this.axios.get(url);
+      console.log(pokemon.data);
+      if (!pokemon) console.log("図鑑番号からPokeAPI叩けてない");
+      let formIUrl = "";
+      const varieties = pokemon.data.varieties;
+      for (let i = 0; i < varieties.length; i++) {
+        if (
+          pokeName.match("メガ") &&
+          varieties[i].pokemon.name.match("-mega") &&
+          !pokeName.match("メガニウム") &&
+          !pokeName.match("メガヤンマ")
+        ) {
+          console.log(varieties[i]);
+          if (
+            pokeName.indexOf("X") !== -1 &&
+            varieties[i].pokemon.name.indexOf("-mega-x") !== -1
+          ) {
+            formIUrl = await varieties[i].pokemon.url;
+            break;
+          } else if (
+            pokeName.match("Y") &&
+            varieties[i].pokemon.name.match("-mega-y")
+          ) {
+            formIUrl = await varieties[i].pokemon.url;
+            break;
+          } else {
+            formIUrl = await varieties[i].pokemon.url;
           }
         }
+        switch (true) {
+          case /アローラの/.test(pokeForm) &&
+            /-alola/.test(varieties[i].pokemon.name):
+            formIUrl = await varieties[i].pokemon.url;
+            break;
+          case /ガラルの/.test(pokeForm) &&
+            /-galar/.test(varieties[i].pokemon.name):
+            formIUrl = await varieties[i].pokemon.url;
+            break;
+          case !/れきせんのゆうしゃ/.test(pokeForm) &&
+            pokeForm &&
+            /-/.test(varieties[i].pokemon.name):
+            formIUrl = await varieties[i].pokemon.url;
+            break;
+          case varieties[i].is_default === true &&
+            (pokeForm === "" || /れきせんのゆうしゃ/.test(pokeForm)):
+            formIUrl = await varieties[0].pokemon.url;
+            break;
+        }
+      }
+      const formI = await this.axios.get(formIUrl);
+      if (formI) {
+        this.imgJadge(formI.data);
       }
     },
-    tetsuLinkOn(i) {
+    tetsuLinkOn() {
       this.tetsuLink = true;
-      const Pokemon = this.Pokemon;
-      const num = Pokemon.no;
-      const url = this.PokeApiIntro + `pokemon-species/${num}`;
-      fetch(url)
-        .then((response) => {
-          return response.json();
-        })
-        .then((result) => {
-          const vari = result.varieties[i];
-          const res = vari.pokemon;
-          if (vari.is_default == true) {
-            this.tetsuLinkVal = this.tetstuLinkIntro + `${num}`;
-          } else if (res.name.match("-mega")) {
-            this.tetsuLinkVal = this.tetstuLinkIntro + `${num}m`;
-          } else if (res.name.match("-alola")) {
-            this.tetsuLinkVal = this.tetstuLinkIntro + `${num}a`;
-          } else if (res.name.match("-galar")) {
-            this.tetsuLinkVal = this.tetstuLinkIntro + `${num}g`;
-          } else if (res.name.match("-")) {
-            this.tetsuLinkVal = this.tetstuLinkIntro + `${num}f`;
-          }
-        });
-    },
-    async simPokeByNum(p) {
-      const res = await API.getPokeByNum(p);
-      return await res;
+      const thisPokemon = this.Pokemon;
+      const num = thisPokemon.no;
+      const pokeName = thisPokemon.name;
+      const pokeForm = thisPokemon.form;
+      if (
+        pokeName.match("メガ") &&
+        !pokeName.match("メガニウム") &&
+        !pokeName.match("メガヤンマ")
+      ) {
+        this.tetsuLinkVal = this.tetstuLinkIntro + `${num}m`;
+      } else if (pokeForm.match("アローラの")) {
+        this.tetsuLinkVal = this.tetstuLinkIntro + `${num}a`;
+      } else if (pokeForm.match("ガラルの")) {
+        this.tetsuLinkVal = this.tetstuLinkIntro + `${num}g`;
+      } else if (pokeForm && !pokeForm.match("れきせんのゆうしゃ")) {
+        this.tetsuLinkVal = this.tetstuLinkIntro + `${num}f`;
+      } else {
+        this.tetsuLinkVal = this.tetstuLinkIntro + `${num}`;
+      }
     },
     imgJadge(pokemon) {
-      console.log(pokemon);
+      console.log("imgJadge発火してます");
       if (this.color === "rare") {
         this.image = pokemon.sprites.other.home.front_shiny;
-      } else if (this.color === null || this.color === "") {
+      } else if (!this.color) {
         this.image = pokemon.sprites.other.home.front_default;
       }
     },

@@ -128,13 +128,13 @@
 
 <script>
 import API from "../../api";
-import PokeSearch from "../PokeSearch.vue";
-import Item from "../Item.vue";
-import ImageLink from "../Image-Link.vue";
-import Nature from "../Nature.vue";
-import AboutNumber from "../AboutNumber.vue";
-import Move from "../Move.vue";
 import { store } from "../../store";
+import AboutNumber from "../AboutNumber.vue";
+import ImageLink from "../Image-Link.vue";
+import Item from "../Item.vue";
+import Move from "../Move.vue";
+import Nature from "../Nature.vue";
+import PokeSearch from "../PokeSearch.vue";
 
 export default {
   name: "CardTemplate",
@@ -260,7 +260,6 @@ export default {
       for (var key in this.Pokemon) {
         formData.append("pokemon", this.Pokemon[key]);
       }
-      formData.append("simId", this.post.simPokesId);
       formData.append("no", this.Pokemon.no);
       formData.append("lv", this.level);
       formData.append("title", this.post.title);
