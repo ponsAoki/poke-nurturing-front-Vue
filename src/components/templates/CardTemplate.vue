@@ -6,7 +6,7 @@
     enctype="multipart/form-data"
   >
     <v-row>
-      <v-col cols="12">
+      <v-col cols="12" max-width="100px">
         <v-text-field
           label="育成論タイトル or 型名"
           v-model="post.title"
@@ -111,14 +111,14 @@
     </v-row>
     <br />
     <br />
-    <v-col>
-      <v-textarea
+    <v-row>
+      <tiptap-vuetify
         v-model="post.memo"
-        label="調整意図や役割などメモ"
-        outlined
-      ></v-textarea>
-    </v-col>
-
+        :extensions="extensions"
+        placeholder="以下、記事の記入"
+      />
+    </v-row>
+    <br />
     <v-conainer class="d-flex align-center">
       <v-btn type="submit" color="primary">投稿</v-btn>
       <v-text class="ml-auto">投稿者: {{ $store.state.user.user.name }}</v-text>
@@ -127,6 +127,24 @@
 </template>
 
 <script>
+import {
+  Blockquote,
+  Bold,
+  BulletList,
+  Code,
+  HardBreak,
+  Heading,
+  History,
+  HorizontalRule,
+  Italic,
+  Link,
+  ListItem,
+  OrderedList,
+  Paragraph,
+  Strike,
+  TiptapVuetify,
+  Underline,
+} from "tiptap-vuetify";
 import API from "../../api";
 import { store } from "../../store";
 import AboutNumber from "../AboutNumber.vue";
@@ -184,6 +202,30 @@ export default {
       Moves: [],
       moveIndexes: [0, 1, 2, 3],
       moveLabeles: ["技1", "技2", "技3", "技4"],
+      extensions: [
+        History,
+        Blockquote,
+        Link,
+        Underline,
+        Strike,
+        Italic,
+        ListItem,
+        BulletList,
+        OrderedList,
+        [
+          Heading,
+          {
+            options: {
+              levels: [1, 2, 3],
+            },
+          },
+        ],
+        Bold,
+        Code,
+        HorizontalRule,
+        Paragraph,
+        HardBreak,
+      ],
     };
   },
 
@@ -338,6 +380,7 @@ export default {
     Nature,
     AboutNumber,
     Move,
+    TiptapVuetify,
   },
 };
 </script>
