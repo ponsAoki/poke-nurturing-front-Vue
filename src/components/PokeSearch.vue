@@ -53,7 +53,6 @@ export default {
     },
     onInput: function () {
       this.$emit("pokechange", this.Pokemon);
-      console.log("ここまで実行されてるよ");
     },
   },
 };
