@@ -49,9 +49,6 @@ export default {
       console.log("エラー: ", err)
     );
     await this.forEachFun();
-    // console.log(this.pokes);
-
-    // console.log(this.pokes);
   },
 
   methods: {
@@ -70,7 +67,6 @@ export default {
       this.imageArr[poke.index] = await image;
       this.pokes.sort((a, b) => a.index - b.index);
       poke.image = image;
-      console.log(this.pokes);
     },
   },
 

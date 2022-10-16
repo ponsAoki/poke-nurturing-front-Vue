@@ -15,22 +15,23 @@
           <v-divider></v-divider>
           <v-col class="d-flex align-center flex-wrap">
             <v-col class="d-flex flex-column justify-center">
-              <v-img max-width="200" :src="post.image"></v-img>
-              <h3 style="white-space: no-wrap" class="font-weight-medium pl-12">
+              <div :class="ImgStyle">
+                <v-img max-width="200" :src="post.image"></v-img>
+              </div>
+              <h3 style="white-space: no-wrap" :class="pokeNameStyle">
                 {{ post.pokemon[2] }}
               </h3>
             </v-col>
             <v-col class="d-flex flex-column justify-end">
-              <div v-for="move in post.moves" :key="move">
+              <div v-for="move in post.moves" :class="MoveStyle" :key="move">
                 <v-chip class="ma-1">
-                  <div class="text-center" style="width: 200px">
+                  <div class="text-center" style="width: 180px">
                     {{ move }}
                   </div>
                 </v-chip>
               </div>
             </v-col>
           </v-col>
-          <br />
           <v-card-text class="py-0">
             <v-col class="d-flex">
               <div class="d-flex flex-column justify-end">
@@ -150,12 +151,37 @@ export default {
   },
   async created() {
     const response = await API.getPostByID(this.$route.params.id);
-    console.log(response);
     this.post = await response;
-    console.log(this.post.memo);
   },
 
   computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+    ImgStyle() {
+      const breakpointName = this.$vuetify.breakpoint.name;
+      if (breakpointName === "xs") {
+        return "d-flex justify-center";
+      } else {
+        return "";
+      }
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    pokeNameStyle() {
+      const breakpointName = this.$vuetify.breakpoint.name;
+      if (breakpointName === "xs") {
+        return "font-weight-medium text-center";
+      } else {
+        return "font-weight-medium pl-12";
+      }
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    MoveStyle() {
+      const breakpointName = this.$vuetify.breakpoint.name;
+      if (breakpointName === "xs") {
+        return "text-center";
+      } else {
+        return "";
+      }
+    },
     // eslint-disable-next-line vue/return-in-computed-property
     paddingAll() {
       switch (this.$vuetify.breakpoint.name) {

@@ -262,7 +262,6 @@ export default {
           if (this.Pokemon.abilities[i] || this.Pokemon.hidden_abilities[i])
             this.post.abilities[i] = this.Pokemon.abilities[i];
         }
-        console.log(this.post.abilities);
         this.post.abilities[this.Pokemon.abilities.length] =
           this.Pokemon.hidden_abilities[0];
       }
@@ -284,9 +283,6 @@ export default {
     },
 
     NumberChange(bn, IN, en, rn) {
-      console.log("NumberChange動いています");
-      console.log(this.post.rn);
-      console.log(bn);
       this.post.bn = bn;
       this.post.IN = IN;
       this.post.en = en;

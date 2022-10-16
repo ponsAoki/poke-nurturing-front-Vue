@@ -204,7 +204,6 @@ export default {
       this.IN = this.INPro;
     },
     enPro() {
-      console.log(this.enPro);
       this.en = this.enPro;
     },
     async IN() {
@@ -230,7 +229,6 @@ export default {
   },
 
   created() {
-    console.log("createdの時のen:", this.en);
     this.nhCal();
     this.nOCal();
   },
@@ -238,8 +236,6 @@ export default {
   methods: {
     //種族値入力
     bnFulled(pokemon) {
-      console.log("bnFulled実行されてます");
-      console.log(pokemon);
       this.$set(this.bn, 0, pokemon.status.h);
       this.$set(this.bn, 1, pokemon.status.a);
       this.$set(this.bn, 2, pokemon.status.b);

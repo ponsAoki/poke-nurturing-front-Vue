@@ -124,8 +124,8 @@
 </template>
 
 <script>
-import Default from "../components/Default";
 import API from "../api";
+import Default from "../components/Default";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "yours",
@@ -151,8 +151,6 @@ export default {
     this.posts = await API.getYourPosts({
       name: this.$store.state.user.user.name,
     });
-    console.log(this.$store.state.user.user.name);
-    console.log(this.posts);
     this.postsCopy = this.posts;
   },
   methods: {

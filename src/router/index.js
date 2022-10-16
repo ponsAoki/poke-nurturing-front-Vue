@@ -11,8 +11,6 @@ import Trend from "../views/Trend.vue";
 import Yours from "../views/Yours.vue";
 const userUrl = "https://poke-nurturing-backend-js.up.railway.app/api/user";
 
-import { store } from "../store";
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -72,21 +70,16 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.requiresAuth) {
-    console.log(store.state.user.user);
     // const storeUser = store.state.user
     const token = localStorage.getItem("accessToken");
 
     if (token) {
-      // console.log("ここまで来てるよ");
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      // console.log("ここまで来てるよ");
       let res = await axios.get(userUrl).catch((err) => {
         console.log(err);
         axios.defaults.headers.common["Authorization"] = null;
         next("login");
       });
-      // console.log(res ? "resあるよ" : "res空だよ");
-      // console.log("ここまで来てるよ");
       console.log(res);
       next();
     } else {

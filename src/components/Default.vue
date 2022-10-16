@@ -75,7 +75,6 @@ export default {
   watch: {
     posts() {
       this.inPokemons();
-      console.log(this.posts);
     },
   },
 
@@ -85,7 +84,6 @@ export default {
 
   methods: {
     inPokemons() {
-      console.log(this.posts);
       this.pokemons = this.posts.map((elm) => elm.pokemon[2]);
     },
     changePokemon() {

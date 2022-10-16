@@ -11,7 +11,6 @@ export const user = {
   mutations: {
     setUser(state, payload) {
       state.user = payload;
-      console.log(state.user.user);
     },
     setToken(state, payload) {
       localStorage.setItem("accessToken", payload);
@@ -31,12 +30,9 @@ export const user = {
           password: user.password,
         });
 
-        console.log(response);
         const token = response.data.token;
-        console.log(token);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         response = await axios.get(userUrl);
-        console.log(response.data.user);
         commit("setUser", response.data);
         //localStorageにトークンを保持している
         commit("setToken", token);

@@ -57,11 +57,9 @@ export default {
     async imgSrc() {
       const thisPokemon = this.Pokemon;
       const pokeName = thisPokemon.name;
-      console.log(pokeName);
       const pokeForm = thisPokemon.form;
       const url = this.PokeApiIntro + `pokemon-species/${thisPokemon.no}`;
       const pokemon = await this.axios.get(url);
-      console.log(pokemon.data);
       if (!pokemon) console.log("図鑑番号からPokeAPI叩けてない");
       let formIUrl = "";
       const varieties = pokemon.data.varieties;
@@ -72,7 +70,6 @@ export default {
           !pokeName.match("メガニウム") &&
           !pokeName.match("メガヤンマ")
         ) {
-          console.log(varieties[i]);
           if (
             pokeName.indexOf("X") !== -1 &&
             varieties[i].pokemon.name.indexOf("-mega-x") !== -1

@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import Default from "../components/Default";
-import API from "../api";
 import CardTemplate from "@/components/templates/CardTemplate.vue";
+import API from "../api";
+import Default from "../components/Default";
 
 export default {
   data() {
@@ -30,9 +30,7 @@ export default {
   },
   async created() {
     const res = await API.getPostByID(this.$route.params.id);
-    console.log(res);
     this.post = res;
-    console.log(this.post);
     this.Pokemon = await API.getPokeById(this.$route.params.id);
   },
   components: { Default, CardTemplate },

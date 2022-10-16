@@ -6,13 +6,10 @@ const postUrl = "https://poke-nurturing-backend-js.up.railway.app/api/post";
 const searchUrl = "https://poke-nurturing-backend-js.up.railway.app/api/search";
 const registerUrl =
   "https://poke-nurturing-backend-js.up.railway.app/api/register";
-// const loginUrl = '/api/login';
 
 // const store = useStore()
 
 export default class API {
-  // constructor()
-
   //ユーザー関連
   //ユーザー登録
   static async register(query) {
@@ -32,7 +29,6 @@ export default class API {
     } else {
       console.log("登録大失敗");
     }
-    console.log(res);
     // router.push('/')
     // return res.data
   }
@@ -58,7 +54,6 @@ export default class API {
   //特定のユーザーの投稿を全件取得
   static async getYourPosts(user) {
     const res = await axios.post(`${postUrl}/yours`, user);
-    console.log(res);
     return res.data;
   }
 
