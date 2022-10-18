@@ -31,7 +31,7 @@
               </v-card-title>
             </div>
             <v-divider></v-divider>
-            <v-row no-gutters>
+            <v-row no-gutters class="d-flex flex-wrap">
               <v-col class="d-flex flex-column align-center">
                 <v-img width="150" :src="post.image"></v-img>
                 <h3 style="white-space: no-wrap" class="font-weight-medium">
@@ -59,6 +59,15 @@
                   {{ post.rn[2] }} - {{ post.rn[3] }} - {{ post.rn[4] }} -
                   {{ post.rn[5] }}
                 </p>
+              </v-col>
+              <v-col class="d-flex flex-column justify-center align-center">
+                <div v-for="move in post.moves" :class="MoveStyle" :key="move">
+                  <v-chip class="ma-1">
+                    <div class="text-center" style="width: 150px">
+                      {{ move }}
+                    </div>
+                  </v-chip>
+                </div>
               </v-col>
             </v-row>
             <v-row no-gutters align="center">
