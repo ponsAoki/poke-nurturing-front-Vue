@@ -31,34 +31,62 @@
               </v-card-title>
             </div>
             <v-divider></v-divider>
-            <v-row no-gutters>
-              <v-col class="d-flex flex-column align-center">
-                <v-img width="150" :src="post.image"></v-img>
-                <h3 style="white-space: no-wrap" class="font-weight-medium">
-                  {{ post.pokemon[2] }}
-                </h3>
+            <v-row no-gutters class="d-flex flex-wrap">
+              <v-col>
+                <div class="d-flex flex-column align-center">
+                  <v-img
+                    max-width="150"
+                    max-height="150"
+                    :src="post.image"
+                  ></v-img>
+                  <h3 style="white-space: no-wrap" class="font-weight-medium">
+                    {{ post.pokemon[2] }}
+                  </h3>
+                </div>
               </v-col>
-              <v-col class="d-flex flex-column justify-center">
-                <p>特性: {{ post.ability }}</p>
-                <p>性格: {{ post.nature }}</p>
-                <p>持ち物: {{ post.item }}</p>
+              <v-col class="pa-4">
+                <div class="d-flex flex-column justify-center">
+                  <p class="text-no-wrap">特性: {{ post.ability }}</p>
+                  <p class="text-no-wrap">性格: {{ post.nature }}</p>
+                  <p class="text-no-wrap">持ち物: {{ post.item }}</p>
+                </div>
               </v-col>
-              <v-col class="d-flex flex-column justify-center">
-                <p>
-                  努力値: {{ post.en[0] }} - {{ post.en[1] }} -
-                  {{ post.en[2] }} - {{ post.en[3] }} - {{ post.en[4] }} -
-                  {{ post.en[5] }}
-                </p>
-                <p>
-                  個体値: {{ post.IN[0] }} - {{ post.IN[1] }} -
-                  {{ post.IN[2] }} - {{ post.IN[3] }} - {{ post.IN[4] }} -
-                  {{ post.IN[5] }}
-                </p>
-                <p>
-                  実数値: {{ post.rn[0] }} - {{ post.rn[1] }} -
-                  {{ post.rn[2] }} - {{ post.rn[3] }} - {{ post.rn[4] }} -
-                  {{ post.rn[5] }}
-                </p>
+              <v-col class="pa-4">
+                <div class="d-flex flex-column justify-center">
+                  <p class="text-no-wrap">
+                    努力値: {{ post.en[0] }} - {{ post.en[1] }} -
+                    {{ post.en[2] }} - {{ post.en[3] }} - {{ post.en[4] }} -
+                    {{ post.en[5] }}
+                  </p>
+                  <p class="text-no-wrap">
+                    個体値: {{ post.IN[0] }} - {{ post.IN[1] }} -
+                    {{ post.IN[2] }} - {{ post.IN[3] }} - {{ post.IN[4] }} -
+                    {{ post.IN[5] }}
+                  </p>
+                  <p class="text-no-wrap">
+                    実数値: {{ post.rn[0] }} - {{ post.rn[1] }} -
+                    {{ post.rn[2] }} - {{ post.rn[3] }} - {{ post.rn[4] }} -
+                    {{ post.rn[5] }}
+                  </p>
+                </div>
+              </v-col>
+              <v-col class="pa-4">
+                <div
+                  class="d-flex flex-column justify-center align-xs-center"
+                  :align-content="$vuetify.breakpoint.xs ? 'center' : 'start'"
+                >
+                  <div
+                    v-for="move in post.moves"
+                    :class="MoveStyle"
+                    :key="move"
+                  >
+                    <v-chip class="ma-1">
+                      <div class="text-center" style="width: 150px">
+                        {{ move }}
+                      </div>
+                    </v-chip>
+                  </div>
+                </div>
               </v-col>
             </v-row>
             <v-row no-gutters align="center">
