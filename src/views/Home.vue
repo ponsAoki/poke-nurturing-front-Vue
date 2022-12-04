@@ -110,7 +110,7 @@
                 >
                   編集
                 </v-btn>
-                <v-btn color="red" text @click="removePost(post._id)"
+                <v-btn color="red" text @click="removePost(post._id, $event)"
                   >削除</v-btn
                 >
               </v-col>
@@ -157,7 +157,8 @@ export default {
   },
 
   methods: {
-    async removePost(id) {
+    async removePost(id, event) {
+      event.preventDefault();
       const response = await API.deletePost(id);
       if (response) {
         this.$router.push({
